@@ -246,7 +246,7 @@
     /* Header */
     .site-header {
       position: fixed;
-      z-index: 1000;
+      z-index: 1003;
       top: 0;
       right: 0;
       left: 0;
@@ -371,6 +371,11 @@
 
     .menu-open .menu-button__lines::after {
       transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .menu-open .menu-button {
+      background: rgba(255, 255, 255, .12);
+      border-color: rgba(255, 255, 255, .28);
     }
 
     .mobile-menu {
@@ -2199,6 +2204,12 @@
     }
 
     /* Responsive */
+    @media (max-width: 979px) {
+      .header__cta {
+        display: none !important;
+      }
+    }
+
     @media (min-width: 560px) {
       :root {
         --page: min(100% - 48px, 1240px);
