@@ -1,0 +1,4272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <meta
+    name="description"
+    content="Wonderful Times SA, Swiss specialist in watch movement sourcing, customization and traditional decoration."
+  />
+  <title>Wonderful Times SA | Watch Movement Customization</title>
+
+  <style>
+    /* =========================================================
+       WONDERFUL TIMES SA
+       Single-file website: HTML + CSS + JS
+       ---------------------------------------------------------
+       IMAGE MAP
+       Images/Logo_Blanc.png  White logo for dark backgrounds
+       Images/Logo_Noir.png   Black logo for light backgrounds
+       Images/img1.png        Company main image
+       Images/img2.png        Company detail image
+       Images/imgk.png        Additional company detail image
+       Images/img3.png        ETA 2824
+       Images/img4.png        ETA 2892
+       Images/img5.png        ETA 7750
+       Images/img6.png        Sellita SW200
+       Images/img7.png        Sellita SW300-1
+       Images/img8.png        Sellita SW500
+       Images/img9.png        La Joux-Perret
+       Images/img10.png       Creative decoration 01
+       Images/img11.png       Creative decoration 02
+       Images/img12.png       Creative decoration 03
+       Images/img13.png       Creative decoration 04
+       Images/imgA.png        Creative carousel image 01
+       Images/imgB.png        Creative carousel image 02
+       Images/imgC.png        Creative carousel image 03
+       Images/imgD.png        Creative carousel image 04
+       Images/imgE.png        Creative carousel image 05
+       Images/imgF.png        Creative carousel image 06
+       Images/imgG.png        Creative carousel image 07
+       Images/imgH.png        Creative carousel image 08
+       Images/imgI.png        Creative carousel image 09
+       Images/imgJ.png        Creative carousel image 10
+       Images/img14.png       Traditional realization 01
+       Images/img15.png       Traditional realization 02
+       Images/img16.png       Traditional realization 03
+       Images/img17.png       Traditional realization 04
+       Images/img18.png       Contact / atelier image
+       Images/bg.png          Responsive hero background banner
+       Images/finish1.png     Côtes de Genève macro
+       Images/finish2.png     Perlage macro
+       Images/finish3.png     Anglage macro
+       Images/finish4.png     Sunray brushing macro
+       Images/finish5.png     Snailing macro
+       Images/finish6.png     Circular graining macro
+       Images/finish7.png     Blued details macro
+       Images/finish8.png     Classic engraving macro
+       Images/imgz.png        Other ETA references
+       Images/rotor.gif       Looping rotor animation
+       ========================================================= */
+
+    :root {
+      --black: #050505;
+      --black-soft: #0b0b0d;
+      --ink: #111114;
+      --grey-900: #1a1a1e;
+      --grey-800: #26262b;
+      --grey-700: #3b3b42;
+      --grey-500: #777780;
+      --grey-300: #c8c8ce;
+      --grey-200: #dedee2;
+      --grey-100: #f2f2f4;
+      --white: #ffffff;
+
+      --blue: #2474ff;
+      --cyan: #00d9ff;
+      --red: #ef2f2f;
+      --orange: #ff7a00;
+      --yellow: #ffd23f;
+      --green: #34e27a;
+      --lime: #a6ff4d;
+
+      --page: min(100% - 32px, 1240px);
+      --radius-xs: 10px;
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 34px;
+      --radius-xl: 48px;
+      --shadow-sm: 0 12px 34px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.18);
+      --ease: cubic-bezier(.2, .7, .2, 1);
+      --header-h: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-h) + 18px);
+      background: var(--black);
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--white);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.is-loading,
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    ::selection {
+      color: var(--white);
+      background: var(--red);
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    a {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      border: 0;
+      color: inherit;
+      background: none;
+      cursor: pointer;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    .page {
+      width: var(--page);
+      margin-inline: auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 10000;
+      top: 10px;
+      left: 10px;
+      padding: 10px 14px;
+      color: var(--white);
+      background: var(--black);
+      border-radius: 999px;
+      transform: translateY(-140%);
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    /* Loader */
+    .loader {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #000;
+      isolation: isolate;
+    }
+
+    .loader::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 0, 0, .12) 48%, rgba(0, 0, 0, .86) 100%);
+      pointer-events: none;
+    }
+
+    #loader-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      filter: saturate(1.25) blur(.15px);
+    }
+
+    .loader__logo-wrap {
+      position: relative;
+      z-index: 2;
+      width: min(48vw, 300px);
+      opacity: 0;
+      transform: scale(.94);
+      filter: drop-shadow(0 0 28px rgba(255, 255, 255, .14));
+    }
+
+    .loader__logo {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: var(--header-h);
+      color: var(--white);
+      background: rgba(5, 5, 5, .72);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      backdrop-filter: blur(18px) saturate(135%);
+      -webkit-backdrop-filter: blur(18px) saturate(135%);
+      transition:
+        background .35s var(--ease),
+        transform .35s var(--ease),
+        border-color .35s var(--ease);
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(5, 5, 5, .9);
+      border-bottom-color: rgba(255, 255, 255, .12);
+    }
+
+    .header__inner {
+      width: var(--page);
+      height: 100%;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .header__brand {
+      position: relative;
+      z-index: 1002;
+      display: inline-flex;
+      align-items: center;
+      min-width: 132px;
+      max-width: 170px;
+    }
+
+    .header__brand img {
+      width: 100%;
+      height: auto;
+    }
+
+    .header__desktop {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header__desktop a {
+      position: relative;
+      padding: 10px 12px;
+      color: rgba(255, 255, 255, .72);
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      border-radius: 999px;
+      transition: color .25s ease, background .25s ease;
+    }
+
+    .header__desktop a:hover,
+    .header__desktop a.is-active {
+      color: var(--white);
+      background: rgba(255, 255, 255, .09);
+    }
+
+    .header__cta {
+      display: none;
+    }
+
+    .menu-button {
+      position: relative;
+      z-index: 1002;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .menu-button__lines,
+    .menu-button__lines::before,
+    .menu-button__lines::after {
+      width: 18px;
+      height: 1.5px;
+      display: block;
+      background: var(--white);
+      border-radius: 99px;
+      transition: transform .28s var(--ease), opacity .2s ease;
+    }
+
+    .menu-button__lines {
+      position: relative;
+    }
+
+    .menu-button__lines::before,
+    .menu-button__lines::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-button__lines::before {
+      top: -6px;
+    }
+
+    .menu-button__lines::after {
+      top: 6px;
+    }
+
+    .menu-open .menu-button__lines {
+      background: transparent;
+    }
+
+    .menu-open .menu-button__lines::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-open .menu-button__lines::after {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 1001;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: calc(var(--header-h) + 28px) 20px max(28px, env(safe-area-inset-bottom));
+      color: var(--white);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(36, 116, 255, .17), transparent 33%),
+        radial-gradient(circle at 90% 72%, rgba(239, 47, 47, .16), transparent 34%),
+        #050505;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    .menu-open .mobile-menu {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .mobile-menu__nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-menu__nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 4px;
+      font-size: clamp(23px, 7vw, 36px);
+      font-weight: 630;
+      line-height: 1.05;
+      letter-spacing: -.035em;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .mobile-menu__nav span {
+      color: rgba(255, 255, 255, .42);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .mobile-menu__footer {
+      margin-top: 28px;
+      display: grid;
+      gap: 12px;
+      color: rgba(255, 255, 255, .58);
+      font-size: 13px;
+    }
+
+    /* Reusable elements */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--grey-500);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--orange), var(--yellow));
+      box-shadow: 0 0 14px rgba(239, 47, 47, .48);
+    }
+
+    .eyebrow--light {
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .display {
+      max-width: 950px;
+      font-size: clamp(42px, 11vw, 104px);
+      font-weight: 610;
+      line-height: .94;
+      letter-spacing: -.065em;
+    }
+
+    .title {
+      max-width: 900px;
+      font-size: clamp(36px, 8.4vw, 76px);
+      font-weight: 610;
+      line-height: .98;
+      letter-spacing: -.058em;
+    }
+
+    .title--small {
+      font-size: clamp(31px, 6.5vw, 58px);
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--grey-700);
+      font-size: clamp(17px, 2.2vw, 21px);
+      line-height: 1.6;
+      letter-spacing: -.012em;
+    }
+
+    .lead--light {
+      color: rgba(255, 255, 255, .66);
+    }
+
+    .section {
+      position: relative;
+      padding-block: 88px;
+      overflow: clip;
+    }
+
+    .section--dark {
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .section--soft {
+      background: var(--grey-100);
+    }
+
+    .section__head {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 42px;
+    }
+
+    .section__head .lead {
+      margin-top: 3px;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 720;
+      letter-spacing: .01em;
+      transition:
+        transform .25s var(--ease),
+        box-shadow .25s var(--ease),
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(.985);
+    }
+
+    .btn:focus-visible,
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid rgba(47, 107, 255, .45);
+      outline-offset: 3px;
+    }
+
+    .btn--light {
+      color: var(--black);
+      background: var(--white);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .18);
+    }
+
+    .btn--dark {
+      color: var(--white);
+      background: var(--black);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .16);
+    }
+
+    .btn--ghost-light {
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .btn--ghost-dark {
+      color: var(--black);
+      border: 1px solid var(--grey-200);
+      background: rgba(255, 255, 255, .74);
+    }
+
+    .btn__icon {
+      width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    .btn__icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chromatic-line {
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--red),
+        var(--orange),
+        var(--yellow),
+        var(--green),
+        var(--cyan),
+        var(--blue),
+        transparent
+      );
+      opacity: .62;
+    }
+
+    .chromatic-text {
+      color: transparent;
+      background: linear-gradient(105deg, #ff4a3d 4%, #ff8a1f 25%, #ffd84f 45%, #48e58c 65%, #38d8ff 82%, #4c8cff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .media {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(36, 116, 255, .22), transparent 30%),
+        radial-gradient(circle at 88% 76%, rgba(239, 47, 47, .19), transparent 33%),
+        #111114;
+      border-radius: var(--radius-md);
+      isolation: isolate;
+    }
+
+    .media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: inherit;
+    }
+
+    .media img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s var(--ease), opacity .3s ease;
+    }
+
+    .media:hover img {
+      transform: scale(1.025);
+    }
+
+    .zoomable-image {
+      cursor: zoom-in;
+    }
+
+    .media-placeholder {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: rgba(255, 255, 255, .62);
+      font-size: 12px;
+      font-weight: 720;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .media-placeholder::before {
+      content: "";
+      position: absolute;
+      width: 52%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 24px rgba(255, 255, 255, .025),
+        0 0 0 52px rgba(255, 255, 255, .015);
+      animation: placeholderPulse 4.8s ease-in-out infinite;
+    }
+
+    @keyframes placeholderPulse {
+      50% {
+        transform: scale(1.06);
+        opacity: .65;
+      }
+    }
+
+    .media-label {
+      position: absolute;
+      z-index: 4;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--white);
+      background: rgba(5, 5, 5, .62);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: calc(var(--header-h) + 56px) 0 42px;
+      color: var(--white);
+      background: #050505;
+      isolation: isolate;
+    }
+
+    .hero__background {
+      position: absolute;
+      z-index: -5;
+      inset: 0;
+      overflow: hidden;
+      background-color: #050505;
+      background-image: url("Images/bg.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      pointer-events: none;
+    }
+
+    .hero__background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, .88) 0%, rgba(0, 0, 0, .63) 46%, rgba(0, 0, 0, .34) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, .36) 0%, rgba(0, 0, 0, .14) 48%, rgba(0, 0, 0, .72) 100%);
+    }
+
+    .hero__aurora,
+    .hero__grid,
+    .hero__noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero__aurora {
+      z-index: -3;
+      overflow: hidden;
+    }
+
+    .aurora {
+      position: absolute;
+      width: 78vw;
+      max-width: 850px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .23;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+
+    .aurora--one {
+      top: -30%;
+      left: -32%;
+      background: radial-gradient(circle, #2474ff 0, #00d9ff 26%, transparent 68%);
+    }
+
+    .aurora--two {
+      right: -35%;
+      bottom: -35%;
+      background: radial-gradient(circle, #ef2f2f 0, #ff7a00 28%, transparent 68%);
+    }
+
+    .aurora--three {
+      top: 32%;
+      left: 40%;
+      width: 52vw;
+      opacity: .12;
+      background: radial-gradient(circle, #34e27a 0, #ffd23f 24%, transparent 66%);
+    }
+
+    .hero__grid {
+      z-index: -2;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, transparent, #000 23%, #000 72%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 23%, #000 72%, transparent);
+    }
+
+    .hero__noise {
+      z-index: -1;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    }
+
+    .hero__inner {
+      width: var(--page);
+      margin-inline: auto;
+      display: grid;
+      gap: 34px;
+    }
+
+    .hero__identity {
+      display: grid;
+      justify-items: start;
+      gap: 20px;
+    }
+
+    .hero__logo {
+      width: min(68vw, 380px);
+    }
+
+    .hero__partner {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: rgba(255, 255, 255, .68);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .hero__partner::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow));
+    }
+
+    .hero__copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero__title {
+      max-width: 1100px;
+      font-size: clamp(48px, 12vw, 126px);
+      font-weight: 560;
+      line-height: .88;
+      letter-spacing: -.075em;
+    }
+
+    .hero__title .line {
+      display: block;
+    }
+
+    .hero__subtitle {
+      max-width: 680px;
+      color: rgba(255, 255, 255, .62);
+      font-size: clamp(17px, 2.25vw, 21px);
+      line-height: 1.56;
+      letter-spacing: -.015em;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero__nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 16px;
+    }
+
+    .hero__nav a {
+      min-height: 66px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      overflow: hidden;
+      color: rgba(255, 255, 255, .8);
+      background: rgba(255, 255, 255, .045);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform .28s var(--ease), background .28s ease, border-color .28s ease;
+    }
+
+    .hero__nav a::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -100% -20%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(239, 47, 47, .22), transparent 65%);
+      transition: transform .5s var(--ease);
+    }
+
+    .hero__nav a:hover {
+      transform: translateY(-3px);
+      color: var(--white);
+      background: rgba(255, 255, 255, .075);
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .hero__nav a:hover::before {
+      transform: translateY(-45%);
+    }
+
+    .hero__nav-number {
+      color: rgba(255, 255, 255, .35);
+      font-size: 10px;
+      font-weight: 730;
+      letter-spacing: .12em;
+    }
+
+    .hero__nav-label {
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      font-weight: 680;
+      line-height: 1.2;
+    }
+
+    .hero__scroll {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, .42);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .hero__scroll-line {
+      width: 72px;
+      height: 1px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .14);
+    }
+
+    .hero__scroll-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: translateX(-100%);
+      animation: scrollLine 2.1s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      50%, 100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Trust strip */
+    .trust-strip {
+      color: var(--white);
+      background: var(--black);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .trust-strip__inner {
+      width: var(--page);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trust-item {
+      min-height: 114px;
+      display: grid;
+      align-content: center;
+      gap: 7px;
+      padding: 22px 16px;
+      border-right: 1px solid rgba(255, 255, 255, .08);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .trust-item:nth-child(even) {
+      border-right: 0;
+    }
+
+    .trust-item:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+
+    .trust-item strong {
+      font-size: clamp(23px, 6vw, 34px);
+      font-weight: 590;
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .trust-item span {
+      color: rgba(255, 255, 255, .47);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    /* Company */
+    .company-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .company-copy {
+      display: grid;
+      align-content: start;
+      gap: 24px;
+      padding: 4px 0 18px;
+    }
+
+    .company-copy__logo {
+      width: min(54vw, 240px);
+      margin-bottom: 6px;
+    }
+
+    .company-copy p {
+      color: var(--grey-700);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .company-rotor {
+      width: min(58vw, 210px);
+      margin-inline: auto;
+    }
+
+    .company-rotor img {
+      width: 100%;
+      height: auto;
+      max-height: 190px;
+      object-fit: contain;
+    }
+
+    .company-features {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .company-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 0;
+      border-top: 1px solid var(--grey-200);
+    }
+
+    .company-feature__number {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--black);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 760;
+    }
+
+    .company-feature strong {
+      font-size: 14px;
+      font-weight: 690;
+    }
+
+    .company-visuals {
+      display: grid;
+      grid-template-columns: 1fr .72fr;
+      grid-template-rows: 1fr .58fr;
+      gap: 10px;
+      min-height: 460px;
+    }
+
+    .company-visuals .media:first-child {
+      grid-row: 1 / 3;
+    }
+
+    /* Capabilities */
+    .capability-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .capability-card {
+      min-height: 210px;
+      position: relative;
+      display: grid;
+      align-content: space-between;
+      gap: 40px;
+      padding: 22px;
+      overflow: hidden;
+      color: var(--white);
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius-md);
+      transition: transform .35s var(--ease), border-color .35s ease;
+    }
+
+    .capability-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    .capability-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      aspect-ratio: 1;
+      top: -85px;
+      right: -80px;
+      border-radius: 50%;
+      filter: blur(38px);
+      opacity: .28;
+      background: var(--glow, var(--red));
+      pointer-events: none;
+    }
+
+    .capability-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .capability-card__number {
+      color: rgba(255, 255, 255, .38);
+      font-size: 11px;
+      font-weight: 740;
+      letter-spacing: .12em;
+    }
+
+    .capability-card__icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .capability-card__icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .capability-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      font-weight: 620;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    .capability-card p {
+      color: rgba(255, 255, 255, .53);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    /* Value section */
+    .value-shell {
+      position: relative;
+      display: grid;
+      gap: 28px;
+      padding: 28px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 18% 22%, rgba(36, 116, 255, .15), transparent 32%),
+        radial-gradient(circle at 84% 74%, rgba(239, 47, 47, .14), transparent 30%),
+        #0b0b0d;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .value-shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(120deg, rgba(255, 255, 255, .08), transparent 32%, transparent 72%, rgba(255, 255, 255, .04));
+    }
+
+    .value-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 18px;
+    }
+
+    .value-copy p {
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.7;
+    }
+
+    .value-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 9px;
+    }
+
+    .value-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(255, 255, 255, .055);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .value-item__icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(239, 47, 47, .92), rgba(255, 122, 0, .9), rgba(255, 210, 63, .88));
+      box-shadow: 0 10px 24px rgba(239, 47, 47, .18);
+    }
+
+    .value-item h3 {
+      margin-bottom: 4px;
+      font-size: 14px;
+      font-weight: 690;
+    }
+
+    .value-item p {
+      color: rgba(255, 255, 255, .49);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Movement catalogue */
+    .catalogue-toolbar {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .catalogue-search {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-inline: 16px;
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .catalogue-search svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      color: var(--grey-500);
+    }
+
+    .catalogue-search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      color: var(--black);
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .catalogue-search input::placeholder {
+      color: var(--grey-500);
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-button {
+      min-height: 44px;
+      flex: 0 0 auto;
+      padding: 0 16px;
+      color: var(--grey-700);
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--grey-300);
+    }
+
+    .filter-button.is-active {
+      color: var(--white);
+      background: var(--black);
+      border-color: var(--black);
+    }
+
+    .movement-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .movement-card {
+      display: grid;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-md);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .045);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), opacity .25s ease;
+    }
+
+    .movement-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 52px rgba(0, 0, 0, .11);
+    }
+
+    .movement-card.is-hidden {
+      display: none;
+    }
+
+    .movement-card .media {
+      aspect-ratio: 1;
+      border-radius: 0;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(36, 116, 255, .11), transparent 30%),
+        radial-gradient(circle at 78% 84%, rgba(239, 47, 47, .11), transparent 30%),
+        #ececef;
+    }
+
+    .movement-card .media::after {
+      border-color: rgba(0, 0, 0, .06);
+      border-radius: 0;
+    }
+
+    .movement-card .media-placeholder {
+      color: rgba(0, 0, 0, .44);
+    }
+
+    .movement-card .media-placeholder::before {
+      border-color: rgba(0, 0, 0, .12);
+      box-shadow:
+        0 0 0 24px rgba(0, 0, 0, .025),
+        0 0 0 52px rgba(0, 0, 0, .015);
+    }
+
+    .movement-card__body {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .movement-card__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .movement-card__brand {
+      margin-bottom: 4px;
+      color: var(--grey-500);
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .movement-card h3 {
+      font-size: 23px;
+      font-weight: 640;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px;
+      color: #255c27;
+      background: #e7f6e7;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 760;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .availability::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #39a642;
+      box-shadow: 0 0 0 4px rgba(57, 166, 66, .11);
+    }
+
+    .availability--request {
+      color: #654d16;
+      background: #f8f0dc;
+    }
+
+    .availability--request::before {
+      background: #c3952d;
+      box-shadow: 0 0 0 4px rgba(195, 149, 45, .11);
+    }
+
+    .movement-card__specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spec {
+      padding: 7px 9px;
+      color: var(--grey-700);
+      background: var(--grey-100);
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 660;
+    }
+
+    .movement-card__action {
+      width: 100%;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 15px;
+      color: var(--white);
+      background: var(--black);
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 710;
+      transition: background .25s ease, transform .25s var(--ease);
+    }
+
+    .movement-card__action:hover {
+      background: var(--grey-900);
+      transform: translateY(-1px);
+    }
+
+    .catalogue-note {
+      margin-top: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      color: var(--grey-700);
+      background: rgba(255, 255, 255, .7);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .catalogue-note svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin-top: 1px;
+    }
+
+    /* Creative decoration */
+    .creative-layout {
+      display: grid;
+      gap: 20px;
+    }
+
+    .creative-copy {
+      display: grid;
+      align-content: start;
+      gap: 24px;
+    }
+
+    .creative-copy p {
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.7;
+    }
+
+    .creative-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .creative-tag {
+      padding: 9px 11px;
+      color: rgba(255, 255, 255, .7);
+      background: rgba(255, 255, 255, .055);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 690;
+      letter-spacing: .04em;
+    }
+
+    .creative-carousel {
+      min-width: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .creative-carousel__viewport {
+      min-width: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+    }
+
+    .creative-carousel__track {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      touch-action: pan-x pan-y;
+    }
+
+    .creative-carousel__track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .creative-carousel__slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .creative-carousel__slide .media {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+
+    .creative-carousel__controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .creative-carousel__arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .creative-carousel__button {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 50%;
+      transition: transform .25s var(--ease), background .25s ease, border-color .25s ease;
+    }
+
+    .creative-carousel__button:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, .11);
+      border-color: rgba(255, 255, 255, .24);
+    }
+
+    .creative-carousel__button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .creative-carousel__dots {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .creative-carousel__dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .25);
+      transition: width .25s var(--ease), background .25s ease, border-radius .25s ease;
+    }
+
+    .creative-carousel__dot.is-active {
+      width: 24px;
+      flex-basis: 24px;
+      border-radius: 999px;
+      background: var(--white);
+    }
+
+    /* Traditional */
+    .techniques-grid {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 68px;
+    }
+
+    .technique-card {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-sm);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+
+    .technique-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .technique-card__media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 22% 16%, rgba(239, 47, 47, .12), transparent 34%),
+        radial-gradient(circle at 82% 80%, rgba(0, 217, 255, .10), transparent 34%),
+        #e8e8eb;
+      border-bottom: 1px solid var(--grey-200);
+      isolation: isolate;
+    }
+
+    .technique-card__media::after {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 54%, rgba(0, 0, 0, .12));
+    }
+
+    .technique-card__media img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .65s var(--ease);
+    }
+
+    .technique-card:hover .technique-card__media img {
+      transform: scale(1.045);
+    }
+
+    .technique-card__placeholder {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      color: rgba(0, 0, 0, .42);
+      font-size: 9px;
+      font-weight: 760;
+      letter-spacing: .1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .technique-card__placeholder::before {
+      content: "";
+      position: absolute;
+      width: 42%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(0, 0, 0, .11);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 18px rgba(0, 0, 0, .025),
+        0 0 0 38px rgba(0, 0, 0, .014);
+    }
+
+    .technique-card__body {
+      display: grid;
+      align-content: space-between;
+      gap: 22px;
+      padding: 18px 20px 20px;
+    }
+
+    .technique-card__index {
+      color: var(--grey-500);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .12em;
+    }
+
+    .technique-card h3 {
+      margin-bottom: 7px;
+      font-size: 18px;
+      font-weight: 650;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+    }
+
+    .technique-card p {
+      color: var(--grey-500);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .realizations-head {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .realizations-gallery {
+      display: grid;
+      gap: 10px;
+    }
+
+    .realizations-gallery .media {
+      aspect-ratio: 1;
+    }
+
+    /* Partnership */
+    .partner-card {
+      display: grid;
+      gap: 30px;
+      padding: 28px;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .035), transparent 55%),
+        #0b0b0d;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius-lg);
+    }
+
+    .partner-card__copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    .partner-card__copy p {
+      color: rgba(255, 255, 255, .59);
+      line-height: 1.7;
+    }
+
+    .partner-card__services {
+      display: grid;
+      gap: 8px;
+    }
+
+    .partner-service {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .11);
+      font-size: 13px;
+      font-weight: 620;
+    }
+
+    .partner-service:last-child {
+      border-bottom: 0;
+    }
+
+    .partner-service span:last-child {
+      color: rgba(255, 255, 255, .32);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .1em;
+    }
+
+    /* Contact */
+    .contact-shell {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-main {
+      position: relative;
+      display: grid;
+      gap: 32px;
+      padding: 28px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(36, 116, 255, .18), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(239, 47, 47, .17), transparent 33%),
+        #070708;
+      border-radius: var(--radius-lg);
+      isolation: isolate;
+    }
+
+    .contact-main::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to right, #000, transparent 80%);
+      -webkit-mask-image: linear-gradient(to right, #000, transparent 80%);
+    }
+
+    .contact-copy {
+      display: grid;
+      align-content: start;
+      gap: 20px;
+    }
+
+    .contact-copy p {
+      max-width: 610px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.65;
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 9px;
+    }
+
+    .contact-actions .btn {
+      width: 100%;
+    }
+
+    .contact-person {
+      display: grid;
+      gap: 12px;
+      padding: 19px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .11);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .contact-person__head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-person__avatar {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--red), var(--orange), var(--yellow));
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: 750;
+      box-shadow: 0 12px 28px rgba(239, 47, 47, .22);
+    }
+
+    .contact-person h3 {
+      font-size: 15px;
+      font-weight: 690;
+    }
+
+    .contact-person p {
+      color: rgba(255, 255, 255, .48);
+      font-size: 11px;
+    }
+
+    .contact-person__number {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: clamp(17px, 4.5vw, 22px);
+      font-weight: 580;
+      letter-spacing: -.025em;
+    }
+
+    .contact-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-info-card {
+      min-height: 170px;
+      display: grid;
+      align-content: space-between;
+      gap: 24px;
+      padding: 22px;
+      color: var(--black);
+      background: var(--grey-100);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-md);
+    }
+
+    .contact-info-card__icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex: 0 0 40px;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: 50%;
+    }
+
+    .contact-info-card__icon svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin: 0;
+    }
+
+    .contact-info-card > div > span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--grey-500);
+      font-size: 10px;
+      font-weight: 730;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .contact-info-card strong {
+      font-size: 18px;
+      font-weight: 620;
+      letter-spacing: -.025em;
+    }
+
+    .contact-image {
+      min-height: 240px;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 46px 0 max(26px, env(safe-area-inset-bottom));
+      color: var(--white);
+      background: var(--black);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .footer__top {
+      display: grid;
+      gap: 30px;
+      margin-bottom: 38px;
+    }
+
+    .footer__brand {
+      display: grid;
+      gap: 16px;
+    }
+
+    .footer__brand img {
+      width: min(56vw, 240px);
+    }
+
+    .footer__brand p {
+      max-width: 410px;
+      color: rgba(255, 255, 255, .44);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footer__nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 20px;
+    }
+
+    .footer__nav a {
+      color: rgba(255, 255, 255, .58);
+      font-size: 12px;
+      transition: color .2s ease;
+    }
+
+    .footer__nav a:hover {
+      color: var(--white);
+    }
+
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 22px;
+      color: rgba(255, 255, 255, .33);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+
+    #send-email {
+      scroll-margin-top: calc(var(--header-h) + 34px);
+    }
+
+    #send-email.is-targeted {
+      animation: emailTargetPulse 1.15s ease;
+    }
+
+    @keyframes emailTargetPulse {
+      0%, 100% { box-shadow: 0 14px 34px rgba(0, 0, 0, .18); }
+      38% { box-shadow: 0 0 0 8px rgba(255, 255, 255, .13), 0 18px 44px rgba(0, 0, 0, .24); }
+    }
+
+    /* Image lightbox */
+    .image-lightbox {
+      position: fixed;
+      z-index: 7000;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 12px;
+      padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+      color: var(--white);
+      background: rgba(0, 0, 0, .94);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .25s ease, visibility .25s ease;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .image-lightbox.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .image-lightbox__top {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .image-lightbox__close,
+    .image-lightbox__nav {
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 50%;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .image-lightbox__close {
+      width: 46px;
+      height: 46px;
+    }
+
+    .image-lightbox__stage {
+      min-width: 0;
+      min-height: 0;
+      position: relative;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) 42px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .image-lightbox__image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .image-lightbox__image {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: calc(100svh - 154px);
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 24px 70px rgba(0, 0, 0, .48));
+    }
+
+    .image-lightbox__nav {
+      width: 42px;
+      height: 42px;
+      transition: background .2s ease, transform .2s var(--ease);
+    }
+
+    .image-lightbox__nav:hover {
+      background: rgba(255, 255, 255, .14);
+      transform: scale(1.04);
+    }
+
+    .image-lightbox__caption {
+      min-height: 20px;
+      color: rgba(255, 255, 255, .66);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .image-lightbox svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    @media (max-width: 559px) {
+      .image-lightbox__stage {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 4px;
+      }
+
+      .image-lightbox__nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      z-index: 5000;
+      right: 16px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      left: 16px;
+      padding: 14px 16px;
+      color: var(--white);
+      background: rgba(10, 10, 12, .94);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      font-size: 12px;
+      font-weight: 620;
+      text-align: center;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .3s ease, transform .3s var(--ease), visibility .3s ease;
+    }
+
+    .toast.is-visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Cursor glow, desktop only */
+    .cursor-glow {
+      display: none;
+      position: fixed;
+      z-index: 2;
+      width: 440px;
+      height: 440px;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 47, 47, .065), transparent 67%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    /* Responsive */
+    @media (min-width: 560px) {
+      :root {
+        --page: min(100% - 48px, 1240px);
+      }
+
+      .section {
+        padding-block: 104px;
+      }
+
+      .hero__nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .movement-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .techniques-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .realizations-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-actions {
+        grid-template-columns: repeat(2, minmax(0, max-content));
+      }
+
+      .contact-actions .btn {
+        width: auto;
+      }
+
+      .toast {
+        right: 22px;
+        left: auto;
+        width: min(360px, calc(100vw - 44px));
+      }
+    }
+
+    @media (min-width: 760px) {
+      :root {
+        --header-h: 78px;
+      }
+
+      .section {
+        padding-block: 122px;
+      }
+
+      .section__head {
+        margin-bottom: 58px;
+      }
+
+      .hero {
+        padding-top: calc(var(--header-h) + 74px);
+      }
+
+      .hero__inner {
+        gap: 46px;
+      }
+
+      .hero__identity {
+        gap: 24px;
+      }
+
+      .hero__nav {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .hero__nav a {
+        min-height: 92px;
+        padding: 17px;
+      }
+
+      .trust-strip__inner {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .trust-item {
+        min-height: 132px;
+        padding: 25px;
+        border-bottom: 0;
+      }
+
+      .trust-item:nth-child(even) {
+        border-right: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .trust-item:last-child {
+        border-right: 0;
+      }
+
+      .company-grid {
+        grid-template-columns: .9fr 1.1fr;
+        align-items: center;
+        gap: 64px;
+      }
+
+      .company-visuals {
+        min-height: 600px;
+      }
+
+      .capability-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .value-shell {
+        grid-template-columns: .88fr 1.12fr;
+        align-items: center;
+        gap: 58px;
+        padding: 48px;
+      }
+
+      .catalogue-toolbar {
+        grid-template-columns: minmax(240px, 1fr) auto;
+        align-items: center;
+      }
+
+      .filters {
+        justify-content: flex-end;
+      }
+
+      .creative-layout {
+        grid-template-columns: .7fr 1.3fr;
+        align-items: center;
+        gap: 62px;
+      }
+
+      .creative-carousel__slide .media {
+        aspect-ratio: 1.18 / 1;
+      }
+
+      .techniques-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .realizations-gallery {
+        grid-template-columns: 1.2fr .8fr .8fr;
+        grid-template-rows: repeat(2, minmax(200px, 1fr));
+      }
+
+      .realizations-gallery .media {
+        aspect-ratio: auto;
+      }
+
+      .realizations-gallery .media:first-child {
+        grid-row: 1 / 3;
+      }
+
+      .realizations-gallery .media:last-child {
+        grid-column: 2 / 4;
+      }
+
+      .partner-card {
+        grid-template-columns: 1fr .8fr;
+        align-items: center;
+        gap: 70px;
+        padding: 52px;
+      }
+
+      .contact-main {
+        grid-template-columns: 1fr .68fr;
+        align-items: center;
+        gap: 55px;
+        padding: 48px;
+      }
+
+      .contact-side {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-image {
+        grid-column: 1 / 3;
+        min-height: 360px;
+      }
+
+      .footer__top {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+      }
+
+      .footer__nav {
+        grid-template-columns: repeat(3, auto);
+        gap: 14px 34px;
+      }
+
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 980px) {
+      :root {
+        --page: min(100% - 80px, 1240px);
+      }
+
+      .header__desktop {
+        display: flex;
+      }
+
+      .header__cta {
+        display: inline-flex;
+        min-height: 42px;
+        padding-inline: 15px;
+        font-size: 11px;
+      }
+
+      .menu-button,
+      .mobile-menu {
+        display: none;
+      }
+
+      .hero__inner {
+        min-height: calc(100svh - var(--header-h) - 116px);
+        align-content: center;
+      }
+
+      .hero__copy {
+        gap: 30px;
+      }
+
+      .hero__scroll {
+        display: flex;
+        margin-top: 6px;
+      }
+
+      .capability-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .movement-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-shell {
+        grid-template-columns: 1.45fr .55fr;
+      }
+
+      .contact-side {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-image {
+        grid-column: auto;
+        min-height: 100%;
+      }
+
+      .cursor-glow {
+        display: block;
+      }
+    }
+
+    @media (min-width: 1180px) {
+      .movement-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .movement-card:last-child {
+        grid-column: span 2;
+        grid-template-columns: .72fr 1.28fr;
+      }
+
+      .movement-card:last-child .media {
+        aspect-ratio: auto;
+      }
+
+      .movement-card:last-child .movement-card__body {
+        align-content: center;
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 759px) {
+      .hero__background {
+        background-position: center center;
+      }
+
+      .hero__background::after {
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, .64) 0%, rgba(0, 0, 0, .48) 46%, rgba(0, 0, 0, .84) 100%),
+          linear-gradient(90deg, rgba(0, 0, 0, .62), rgba(0, 0, 0, .3));
+      }
+    }
+
+    @media (max-width: 379px) {
+      .hero__nav {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-strip__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item,
+      .trust-item:nth-child(even),
+      .trust-item:nth-last-child(-n + 2) {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .trust-item:last-child {
+        border-bottom: 0;
+      }
+
+      .company-visuals {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr .65fr;
+      }
+
+      .company-visuals .media:first-child {
+        grid-row: auto;
+      }
+
+      .company-visuals .media:last-child {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .cursor-glow {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="is-loading">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Intro loader -->
+  <div class="loader" id="loader" aria-label="Loading Wonderful Times">
+    <canvas id="loader-canvas" aria-hidden="true"></canvas>
+    <div class="loader__logo-wrap">
+      <img
+        class="loader__logo"
+        src="Images/Logo_Blanc.png"
+        alt="Wonderful Times SA"
+      />
+    </div>
+  </div>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Fixed header -->
+  <header class="site-header" id="site-header">
+    <div class="header__inner">
+      <a class="header__brand" href="#home" aria-label="Wonderful Times, back to top">
+        <img src="Images/Logo_Blanc.png" alt="Wonderful Times SA" />
+      </a>
+
+      <nav class="header__desktop" aria-label="Primary navigation">
+        <a href="#company">The Company</a>
+        <a href="#sourcing">Movement Sourcing</a>
+        <a href="#creative">Creative Decoration</a>
+        <a href="#traditional">Traditional Decoration</a>
+      </nav>
+
+      <a class="btn btn--light header__cta email-cta" href="#send-email">Start a project</a>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="menu-button__lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+      <a href="#company"><span>01</span> The Company</a>
+      <a href="#sourcing"><span>02</span> Movement Sourcing</a>
+      <a href="#creative"><span>03</span> Creative Decoration</a>
+      <a href="#traditional"><span>04</span> Traditional Decoration</a>
+      <a href="#contact"><span>05</span> Contact</a>
+    </nav>
+    <div class="mobile-menu__footer">
+      <a href="mailto:office@wonderfultimes.ch">office@wonderfultimes.ch</a>
+      <span>Alle, Switzerland</span>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero__background" aria-hidden="true"></div>
+      <div class="hero__aurora" aria-hidden="true">
+        <div class="aurora aurora--one"></div>
+        <div class="aurora aurora--two"></div>
+        <div class="aurora aurora--three"></div>
+      </div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div class="hero__identity">
+          <img
+            class="hero__logo hero-reveal"
+            src="Images/Logo_Blanc.png"
+            alt="Wonderful Times SA"
+          />
+          <div class="hero__partner hero-reveal">
+            Official customization partner of La Joux-Perret
+          </div>
+        </div>
+
+        <div class="hero__copy">
+          <h1 class="hero__title" aria-label="Swiss movements, made unmistakably yours">
+            <span class="line hero-reveal">Swiss movements.</span>
+            <span class="line hero-reveal chromatic-text">Made unmistakably yours.</span>
+          </h1>
+
+          <p class="hero__subtitle hero-reveal">
+            Sourcing, customization and high-end finishing for watch brands,
+            independent creators and collectors.
+          </p>
+
+          <div class="hero__actions hero-reveal">
+            <a class="btn btn--light" href="#sourcing">
+              Explore movements
+              <span class="btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+            <a class="btn btn--ghost-light email-cta" href="#send-email">Discuss a project</a>
+          </div>
+        </div>
+
+        <nav class="hero__nav hero-reveal" aria-label="Section shortcuts">
+          <a href="#company">
+            <span class="hero__nav-number">01</span>
+            <span class="hero__nav-label">The Company</span>
+          </a>
+          <a href="#sourcing">
+            <span class="hero__nav-number">02</span>
+            <span class="hero__nav-label">Movement Sourcing</span>
+          </a>
+          <a href="#creative">
+            <span class="hero__nav-number">03</span>
+            <span class="hero__nav-label">Creative Decoration</span>
+          </a>
+          <a href="#traditional">
+            <span class="hero__nav-number">04</span>
+            <span class="hero__nav-label">Traditional Decoration</span>
+          </a>
+          <a href="#contact">
+            <span class="hero__nav-number">05</span>
+            <span class="hero__nav-label">Contact</span>
+          </a>
+        </nav>
+
+        <div class="hero__scroll hero-reveal" aria-hidden="true">
+          <span class="hero__scroll-line"></span>
+          Scroll to discover
+        </div>
+      </div>
+    </section>
+
+    <!-- Key facts -->
+    <section class="trust-strip" aria-label="Company highlights">
+      <div class="trust-strip__inner">
+        <div class="trust-item">
+          <strong>2007</strong>
+          <span>Founded in Switzerland</span>
+        </div>
+        <div class="trust-item">
+          <strong>Swiss</strong>
+          <span>Movement sourcing network</span>
+        </div>
+        <div class="trust-item">
+          <strong>Bespoke</strong>
+          <span>Decoration and assembly</span>
+        </div>
+        <div class="trust-item">
+          <strong>MLJP</strong>
+          <span>Official customization partner</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company -->
+    <section class="section" id="company">
+      <div class="page">
+        <div class="section__head">
+          <span class="eyebrow reveal">The Company</span>
+          <h2 class="title reveal">
+            Swiss watchmaking expertise, built around your identity.
+          </h2>
+        </div>
+
+        <div class="company-grid">
+          <div class="company-copy">
+            <img
+              class="company-copy__logo reveal"
+              src="Images/Logo_Noir.png"
+              alt="Wonderful Times SA"
+            />
+
+            <p class="reveal">
+              Founded in 2007, Wonderful Times SA is a Swiss company based in Alle.
+              We specialize in sourcing watch movements and customizing watch
+              components for established brands, emerging labels and independent
+              creators.
+            </p>
+
+            <p class="reveal">
+              Our extensive network and industry expertise allow us to select the
+              right partners for each project. From the first technical discussion
+              to the final finish, every solution is tailored to the brand,
+              production volume and creative direction.
+            </p>
+
+            <figure class="company-rotor reveal">
+              <img
+                src="Images/rotor.gif"
+                alt="Animated customized watch movement rotor"
+              />
+            </figure>
+
+            <div class="company-features">
+              <div class="company-feature reveal">
+                <span class="company-feature__number">01</span>
+                <strong>Movement sourcing and project guidance</strong>
+              </div>
+              <div class="company-feature reveal">
+                <span class="company-feature__number">02</span>
+                <strong>Made-to-measure component customization</strong>
+              </div>
+              <div class="company-feature reveal">
+                <span class="company-feature__number">03</span>
+                <strong>Swiss-based expertise and partner network</strong>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <a class="btn btn--dark email-cta" href="#send-email">
+                Bring your project to life
+                <span class="btn__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="company-visuals reveal-group">
+            <figure class="media">
+              <span class="media-placeholder">Images/img1.png</span>
+              <img src="Images/img1.png" alt="Wonderful Times watchmaking expertise" />
+              <figcaption class="media-label">
+                <span>Wonderful Times SA</span>
+                <span>Alle, Switzerland</span>
+              </figcaption>
+            </figure>
+
+            <figure class="media">
+              <span class="media-placeholder">Images/img2.png</span>
+              <img src="Images/img2.png" alt="Watch movement customization detail" />
+            </figure>
+
+            <figure class="media">
+              <span class="media-placeholder">Images/imgk.png</span>
+              <img src="Images/imgk.png" alt="Detailed watch movement customization" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value of customization -->
+    <section class="section section--soft">
+      <div class="page">
+        <div class="value-shell reveal">
+          <div class="value-copy">
+            <span class="eyebrow eyebrow--light">Value through distinction</span>
+            <h2 class="title title--small">
+              Does personalization increase the value of a watch?
+            </h2>
+            <p>
+              Yes. A distinctive movement can increase both emotional and perceived
+              value by making the watch rarer, more coherent with its brand identity
+              and more memorable to collectors.
+            </p>
+            <p>
+              Wonderful Times brings a layer of exclusivity and specialist execution
+              to La Joux-Perret movements and other Swiss calibres.
+            </p>
+          </div>
+
+          <div class="value-list">
+            <article class="value-item">
+              <span class="value-item__icon" aria-hidden="true">✦</span>
+              <div>
+                <h3>Exclusivity and rarity</h3>
+                <p>A recognizable, limited execution creates a stronger sense of uniqueness.</p>
+              </div>
+            </article>
+            <article class="value-item">
+              <span class="value-item__icon" aria-hidden="true">◇</span>
+              <div>
+                <h3>High-end finishes</h3>
+                <p>Engraving, decoration and selected materials add refinement and prestige.</p>
+              </div>
+            </article>
+            <article class="value-item">
+              <span class="value-item__icon" aria-hidden="true">◎</span>
+              <div>
+                <h3>Enhanced identity</h3>
+                <p>The calibre becomes an extension of the brand's visual and technical language.</p>
+              </div>
+            </article>
+            <article class="value-item">
+              <span class="value-item__icon" aria-hidden="true">↗</span>
+              <div>
+                <h3>Stronger perceived value</h3>
+                <p>A coherent bespoke execution can improve desirability and market positioning.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sourcing -->
+    <section class="section section--soft" id="sourcing">
+      <div class="page">
+        <div class="section__head">
+          <span class="eyebrow reveal">Sourcing Watch Movements</span>
+          <h2 class="title reveal">
+            A curated catalogue of original Swiss movements.
+          </h2>
+          <p class="lead reveal">
+            Wonderful Times is a major provider of original Swiss watch movements.
+            The references below represent selected availability. Other calibres
+            can be sourced on request.
+          </p>
+        </div>
+
+        <div class="catalogue-toolbar reveal">
+          <label class="catalogue-search">
+            <span class="sr-only">Search movements</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/>
+              <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <input id="movement-search" type="search" placeholder="Search a calibre, brand or function" />
+          </label>
+
+          <div class="filters" role="group" aria-label="Filter movement brands">
+            <button class="filter-button is-active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="eta">ETA</button>
+            <button class="filter-button" type="button" data-filter="sellita">Sellita</button>
+            <button class="filter-button" type="button" data-filter="ljp">La Joux-Perret</button>
+          </div>
+        </div>
+
+        <div class="movement-grid" id="movement-grid">
+          <article class="movement-card reveal" data-brand="eta" data-search="eta 2824 automatic three hands date">
+            <figure class="media">
+              <span class="media-placeholder">Images/img3.png</span>
+              <img src="Images/img3.png" alt="ETA 2824 watch movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">ETA</div>
+                  <h3>2824</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">3 hands</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="eta" data-search="eta 2892 automatic slim three hands date">
+            <figure class="media">
+              <span class="media-placeholder">Images/img4.png</span>
+              <img src="Images/img4.png" alt="ETA 2892 watch movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">ETA</div>
+                  <h3>2892</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">Slim profile</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="eta" data-search="eta 7750 automatic chronograph">
+            <figure class="media">
+              <span class="media-placeholder">Images/img5.png</span>
+              <img src="Images/img5.png" alt="ETA 7750 chronograph movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">ETA</div>
+                  <h3>7750</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">Chronograph</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="sellita" data-search="sellita sw200 automatic three hands date">
+            <figure class="media">
+              <span class="media-placeholder">Images/img6.png</span>
+              <img src="Images/img6.png" alt="Sellita SW200 watch movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">Sellita</div>
+                  <h3>SW200</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">3 hands</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="sellita" data-search="sellita sw300-1 automatic slim three hands date">
+            <figure class="media">
+              <span class="media-placeholder">Images/img7.png</span>
+              <img src="Images/img7.png" alt="Sellita SW300-1 watch movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">Sellita</div>
+                  <h3>SW300-1</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">Slim profile</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="sellita" data-search="sellita sw500 automatic chronograph date">
+            <figure class="media">
+              <span class="media-placeholder">Images/img8.png</span>
+              <img src="Images/img8.png" alt="Sellita SW500 chronograph movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">Sellita</div>
+                  <h3>SW500</h3>
+                </div>
+                <span class="availability">Selected supply</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Automatic</span>
+                <span class="spec">Chronograph</span>
+                <span class="spec">Date</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Request availability <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="eta" data-search="eta 2834 7001 2895 2896 2897 7751 7753 other calibres">
+            <figure class="media">
+              <span class="media-placeholder">Images/imgz.png</span>
+              <img src="Images/imgz.png" alt="Other ETA watch movement references" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">ETA</div>
+                  <h3>Other calibres</h3>
+                </div>
+                <span class="availability availability--request">On request</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">2834</span>
+                <span class="spec">7001</span>
+                <span class="spec">2895</span>
+                <span class="spec">2896</span>
+                <span class="spec">2897</span>
+                <span class="spec">7751</span>
+                <span class="spec">7753</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Ask for a calibre <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="movement-card reveal" data-brand="ljp" data-search="la joux-perret official customization partner bespoke calibre movement">
+            <figure class="media">
+              <span class="media-placeholder">Images/img9.png</span>
+              <img src="Images/img9.png" alt="La Joux-Perret watch movement" />
+            </figure>
+            <div class="movement-card__body">
+              <div class="movement-card__head">
+                <div>
+                  <div class="movement-card__brand">La Joux-Perret</div>
+                  <h3>Project-based sourcing</h3>
+                </div>
+                <span class="availability availability--request">On request</span>
+              </div>
+              <div class="movement-card__specs">
+                <span class="spec">Official customizer</span>
+                <span class="spec">Bespoke finishing</span>
+                <span class="spec">Technical guidance</span>
+              </div>
+              <a class="movement-card__action email-cta" href="#send-email">
+                Discuss an MLJP project <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="catalogue-note reveal">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 10v6M12 7.2v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          <p>
+            Availability, grade, quantity and delivery conditions depend on the
+            reference and project. Contact us for a precise sourcing proposal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Creative decoration -->
+    <section class="section section--dark" id="creative">
+      <div class="page">
+        <div class="creative-layout">
+          <div class="creative-copy">
+            <span class="eyebrow eyebrow--light reveal">Creative Decoration</span>
+            <h2 class="title title--small reveal">
+              A movement can become a visual signature.
+            </h2>
+            <p class="reveal">
+              Beyond traditional finishing, we develop contemporary executions that
+              translate a brand universe into colour, texture, graphics and
+              distinctive material effects.
+            </p>
+            <div class="creative-tags reveal">
+              <span class="creative-tag">Custom colour</span>
+              <span class="creative-tag">Graphic engraving</span>
+              <span class="creative-tag">Contrasting finishes</span>
+              <span class="creative-tag">Micro-patterns</span>
+              <span class="creative-tag">Personalized rotors</span>
+              <span class="creative-tag">Limited editions</span>
+            </div>
+            <div class="reveal">
+              <a class="btn btn--light email-cta" href="#send-email">Create a signature finish</a>
+            </div>
+          </div>
+
+          <div class="creative-carousel reveal" aria-label="Creative decoration image carousel">
+            <div class="creative-carousel__viewport">
+              <div class="creative-carousel__track" id="creative-carousel-track" tabindex="0">
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgA.png</span>
+                  <img src="Images/imgA.png" alt="Creative movement decoration project 01" />
+                  <figcaption class="media-label">
+                    <span>Creative decoration</span>
+                    <span>Project 01</span>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgB.png</span>
+                  <img src="Images/imgB.png" alt="Creative movement decoration project 02" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgC.png</span>
+                  <img src="Images/imgC.png" alt="Creative movement decoration project 03" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgD.png</span>
+                  <img src="Images/imgD.png" alt="Creative movement decoration project 04" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgE.png</span>
+                  <img src="Images/imgE.png" alt="Creative movement decoration project 05" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgF.png</span>
+                  <img src="Images/imgF.png" alt="Creative movement decoration project 06" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgG.png</span>
+                  <img src="Images/imgG.png" alt="Creative movement decoration project 07" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgH.png</span>
+                  <img src="Images/imgH.png" alt="Creative movement decoration project 08" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgI.png</span>
+                  <img src="Images/imgI.png" alt="Creative movement decoration project 09" />
+                </figure>
+              </div>
+              <div class="creative-carousel__slide">
+                <figure class="media">
+                  <span class="media-placeholder">Images/imgJ.png</span>
+                  <img src="Images/imgJ.png" alt="Creative movement decoration project 10" />
+                </figure>
+              </div>
+              </div>
+            </div>
+
+            <div class="creative-carousel__controls">
+              <div class="creative-carousel__arrows">
+                <button class="creative-carousel__button" id="creative-carousel-prev" type="button" aria-label="Previous creative decoration image">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="creative-carousel__button" id="creative-carousel-next" type="button" aria-label="Next creative decoration image">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="creative-carousel__dots" id="creative-carousel-dots" aria-label="Choose a creative decoration image"></div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Traditional decoration -->
+    <section class="section section--soft" id="traditional">
+      <div class="page">
+        <div class="section__head">
+          <span class="eyebrow reveal">Traditional Decorations</span>
+          <h2 class="title reveal">
+            The visual language of fine watchmaking.
+          </h2>
+          <p class="lead reveal">
+            Traditional techniques bring depth, rhythm and light to bridges, plates,
+            rotors and visible components.
+          </p>
+        </div>
+
+        <div class="techniques-grid">
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish1.png</span>
+              <img src="Images/finish1.png" alt="Macro of Côtes de Genève finishing" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">01</span>
+              <div>
+                <h3>Côtes de Genève</h3>
+                <p>Parallel decorative waves creating structured reflections across bridges and rotors.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish2.png</span>
+              <img src="Images/finish2.png" alt="Macro of perlage finishing" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">02</span>
+              <div>
+                <h3>Perlage</h3>
+                <p>Overlapping circular graining traditionally used on plates and concealed surfaces.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish3.png</span>
+              <img src="Images/finish3.png" alt="Macro of anglage finishing" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">03</span>
+              <div>
+                <h3>Anglage</h3>
+                <p>Refined beveling that defines component edges and catches light with precision.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish4.png</span>
+              <img src="Images/finish4.png" alt="Macro of sunray brushing" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">04</span>
+              <div>
+                <h3>Sunray brushing</h3>
+                <p>Radial lines extending from a center point for a dynamic, luminous effect.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish5.png</span>
+              <img src="Images/finish5.png" alt="Macro of snailing finishing" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">05</span>
+              <div>
+                <h3>Snailing</h3>
+                <p>Spiral finishing commonly applied to wheels, barrels and selected circular parts.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish6.png</span>
+              <img src="Images/finish6.png" alt="Macro of circular graining" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">06</span>
+              <div>
+                <h3>Other finishes</h3>
+                <p>We can discuss any type of decorative finishing to achieve refined, high-end results tailored to your project.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish7.png</span>
+              <img src="Images/finish7.png" alt="Macro of blued watchmaking details" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">07</span>
+              <div>
+                <h3>Sandblasted finish</h3>
+                <p>Fine abrasive blasting creates a uniform matte texture with a refined, technical appearance.</p>
+              </div>
+            </div>
+          </article>
+          <article class="technique-card reveal">
+            <figure class="technique-card__media">
+              <span class="technique-card__placeholder">Images/finish8.png</span>
+              <img src="Images/finish8.png" alt="Macro of classic movement engraving" />
+            </figure>
+            <div class="technique-card__body">
+              <span class="technique-card__index">08</span>
+              <div>
+                <h3>Classic engraving</h3>
+                <p>Logotypes, lettering and ornamental motifs integrated into the movement architecture.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+    </section>
+
+    <!-- La Joux-Perret -->
+    <section class="section section--dark">
+      <div class="page">
+        <div class="partner-card reveal">
+          <div class="partner-card__copy">
+            <span class="eyebrow eyebrow--light">La Joux-Perret Partnership</span>
+            <h2 class="title title--small">
+              Official customization partner of La Joux-Perret.
+            </h2>
+            <p>
+              Wonderful Times SA offers made-to-measure customization for
+              La Joux-Perret movements, combining engraving, personalized assembly,
+              exclusive finishes and technical optimization.
+            </p>
+            <div>
+              <a class="btn btn--light email-cta" href="#send-email">
+                Submit a La Joux-Perret project
+              </a>
+            </div>
+          </div>
+
+          <div class="partner-card__services">
+            <div class="partner-service">
+              <span>Made-to-measure engraving</span><span>01</span>
+            </div>
+            <div class="partner-service">
+              <span>Personalized assembly</span><span>02</span>
+            </div>
+            <div class="partner-service">
+              <span>Exclusive finishes</span><span>03</span>
+            </div>
+            <div class="partner-service">
+              <span>Performance optimization</span><span>04</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="page">
+        <div class="section__head">
+          <span class="eyebrow reveal">Contact</span>
+          <h2 class="title reveal">
+            Have a movement or watch in mind?
+          </h2>
+          <p class="lead reveal">
+            Share your technical requirements, visual direction and expected volume.
+            We will help define the right sourcing and customization approach.
+          </p>
+        </div>
+
+        <div class="contact-shell">
+          <div class="contact-main reveal">
+            <div class="contact-copy">
+              <span class="eyebrow eyebrow--light">Start a conversation</span>
+              <h3 class="title title--small">Let us shape your next calibre.</h3>
+              <p>
+                Contact Wonderful Times SA for movement sourcing, decoration,
+                customization or a La Joux-Perret project.
+              </p>
+
+              <div class="contact-actions">
+                <a class="btn btn--light" id="send-email" href="mailto:office@wonderfultimes.ch">
+                  Send an email
+                  <span class="btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.5"/>
+                      <path d="m5 7 7 6 7-6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </a>
+                <button class="btn btn--ghost-light" id="add-contact" type="button">
+                  Add direct contact
+                  <span class="btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="contact-person">
+              <div class="contact-person__head">
+                <span class="contact-person__avatar" aria-hidden="true">CS</span>
+                <div>
+                  <h3>Christophe Schaefer</h3>
+                  <p>Direct contact</p>
+                </div>
+              </div>
+              <a class="contact-person__number" href="tel:+41793331230">
+                +41 79 333 12 30
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="contact-side">
+            <a class="contact-info-card reveal" href="mailto:office@wonderfultimes.ch">
+              <span class="contact-info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="m5 7 7 6 7-6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <span>Email</span>
+                <strong>office@wonderfultimes.ch</strong>
+              </div>
+            </a>
+
+            <div class="contact-info-card reveal">
+              <span class="contact-info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="12" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
+              <div>
+                <span>Location</span>
+                <strong>Alle, Switzerland</strong>
+              </div>
+            </div>
+
+      
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="page">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="Images/Logo_Blanc.png" alt="Wonderful Times SA" />
+          <p>
+            Swiss watch movement sourcing, customization and decoration.
+            Official customization partner of La Joux-Perret.
+          </p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <a href="#company">The Company</a>
+          <a href="#sourcing">Movement Sourcing</a>
+          <a href="#creative">Creative Decoration</a>
+          <a href="#traditional">Traditional Decoration</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:office@wonderfultimes.ch">Email us</a>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Wonderful Times SA</span>
+        <span>Alle, Switzerland</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expanded image viewer">
+    <div class="image-lightbox__top">
+      <button class="image-lightbox__close" id="image-lightbox-close" type="button" aria-label="Close expanded image">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="image-lightbox__stage">
+      <button class="image-lightbox__nav" id="image-lightbox-prev" type="button" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="image-lightbox__image-wrap">
+        <img class="image-lightbox__image" id="image-lightbox-image" src="" alt="" />
+      </div>
+      <button class="image-lightbox__nav" id="image-lightbox-next" type="button" aria-label="Next image">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <p class="image-lightbox__caption" id="image-lightbox-caption"></p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    Contact file downloaded.
+  </div>
+
+  <!-- GSAP 3.13 + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const body = document.body;
+      const loader = document.getElementById("loader");
+      const loaderCanvas = document.getElementById("loader-canvas");
+      const loaderLogo = document.querySelector(".loader__logo-wrap");
+      const header = document.getElementById("site-header");
+      const menuButton = document.querySelector(".menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const toast = document.getElementById("toast");
+      const sendEmailButton = document.getElementById("send-email");
+      const creativeTrack = document.getElementById("creative-carousel-track");
+      const creativePrev = document.getElementById("creative-carousel-prev");
+      const creativeNext = document.getElementById("creative-carousel-next");
+      const creativeDots = document.getElementById("creative-carousel-dots");
+      const lightbox = document.getElementById("image-lightbox");
+      const lightboxImage = document.getElementById("image-lightbox-image");
+      const lightboxCaption = document.getElementById("image-lightbox-caption");
+      const lightboxClose = document.getElementById("image-lightbox-close");
+      const lightboxPrev = document.getElementById("image-lightbox-prev");
+      const lightboxNext = document.getElementById("image-lightbox-next");
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* ---------------------------------------------------------
+         Missing-image handling
+         Keeps every placeholder clean until the final image exists.
+      --------------------------------------------------------- */
+      document.querySelectorAll("main img").forEach((img) => {
+        img.addEventListener("error", () => {
+          img.style.display = "none";
+        });
+      });
+
+      /* ---------------------------------------------------------
+         Loader: expanding radial RGB firework with luminous trails.
+      --------------------------------------------------------- */
+      const startLoader = () => {
+        if (!loaderCanvas || !loader) return;
+
+        const ctx = loaderCanvas.getContext("2d", { alpha: true });
+        const rn = (min, max) => Math.random() * (max - min) + min;
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let ratio = Math.min(window.devicePixelRatio || 1, 2);
+        let frameId = null;
+        let particles = [];
+        let t = 1;
+        let running = true;
+
+        const particleCount = reduceMotion
+          ? 0
+          : Math.min(280, Math.max(170, Math.floor((width * height) / 5200)));
+
+        // Bright spectrum with red, orange, yellow, green, cyan and blue dominant.
+        // A small violet range is retained only inside the firework itself for a true RGB spectrum.
+        const hueBands = [
+          [0, 12],
+          [18, 35],
+          [45, 62],
+          [95, 145],
+          [168, 194],
+          [198, 226],
+          [252, 276]
+        ];
+
+        const resize = () => {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+          loaderCanvas.width = Math.floor(width * ratio);
+          loaderCanvas.height = Math.floor(height * ratio);
+          loaderCanvas.style.width = width + "px";
+          loaderCanvas.style.height = height + "px";
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+          createParticles();
+        };
+
+        const createParticles = () => {
+          const centerX = width / 2;
+          const centerY = height / 2;
+          particles = [];
+
+          for (let i = 0; i < particleCount; i++) {
+            const band = hueBands[Math.floor(Math.random() * hueBands.length)];
+            const hue = Math.round(rn(band[0], band[1]));
+            const angle = rn(0, Math.PI * 2);
+
+            particles.push({
+              color: `hsla(${hue}, 100%, ${rn(56, 68)}%, 1)`,
+              distortion: rn(2, 16),
+              tmod: rn(5, 16),
+              size: rn(.75, 4.4),
+              speed: rn(.00035, .0022) * (rn(0, 1) > .5 ? 1 : -1),
+              angle,
+              brightness: rn(.72, 1),
+              lastPos: { x: centerX, y: centerY }
+            });
+          }
+        };
+
+        const draw = () => {
+          if (!running) return;
+          frameId = requestAnimationFrame(draw);
+          t += 1;
+
+          ctx.globalCompositeOperation = "source-over";
+          ctx.fillStyle = "rgba(0, 0, 0, .105)";
+          ctx.fillRect(0, 0, width, height);
+
+          const maxRadius = Math.min(
+            Math.max(width, height) * .46,
+            Math.min(width, height) * .72
+          );
+
+          // Same expanding sine-radius behavior as the supplied animation.
+          // It reaches the widest point smoothly during the extended loader.
+          const radialPhase = Math.min(t / 104, Math.PI / 2);
+          const currentRadius = maxRadius * Math.sin(radialPhase);
+          const centerX = width / 2;
+          const centerY = height / 2;
+
+          ctx.globalCompositeOperation = "lighter";
+
+          particles.forEach((particle) => {
+            const ripple = particle.distortion * Math.sin(t / particle.tmod);
+            const radius = currentRadius + ripple;
+            const x = centerX + radius * Math.cos(particle.angle);
+            const y = centerY + radius * Math.sin(particle.angle);
+
+            ctx.strokeStyle = particle.color;
+            ctx.lineWidth = particle.size;
+            ctx.lineCap = "round";
+            ctx.shadowBlur = 7 + particle.size * 4;
+            ctx.shadowColor = particle.color;
+            ctx.globalAlpha = particle.brightness;
+            ctx.beginPath();
+            ctx.moveTo(particle.lastPos.x, particle.lastPos.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            particle.lastPos = { x, y };
+            particle.angle = (particle.angle + particle.speed) % (Math.PI * 2);
+          });
+
+          ctx.globalAlpha = 1;
+          ctx.shadowBlur = 0;
+          ctx.globalCompositeOperation = "source-over";
+        };
+
+        const finish = () => {
+          running = false;
+          if (frameId) cancelAnimationFrame(frameId);
+          window.removeEventListener("resize", resize);
+          body.classList.remove("is-loading");
+          loader.setAttribute("aria-hidden", "true");
+          loader.style.display = "none";
+          startPageAnimations();
+        };
+
+        resize();
+        window.addEventListener("resize", resize, { passive: true });
+
+        if (!reduceMotion) {
+          frameId = requestAnimationFrame(draw);
+        }
+
+        if (window.gsap) {
+          const timeline = gsap.timeline({ onComplete: finish });
+          timeline
+            .to(loaderLogo, {
+              opacity: 1,
+              scale: 1,
+              duration: reduceMotion ? .05 : .42,
+              ease: "power2.out"
+            })
+            .to(loaderLogo, {
+              opacity: 1,
+              scale: 1.015,
+              duration: reduceMotion ? .05 : 1.72,
+              ease: "sine.inOut"
+            })
+            .to(loaderLogo, {
+              opacity: 0,
+              scale: 1.045,
+              duration: reduceMotion ? .05 : .36,
+              ease: "power2.in"
+            })
+            .to(loader, {
+              opacity: 0,
+              duration: reduceMotion ? .05 : .46,
+              ease: "power2.inOut"
+            }, "-=.12");
+        } else {
+          loaderLogo.style.opacity = "1";
+          setTimeout(finish, reduceMotion ? 180 : 2900);
+        }
+      };
+
+      /* ---------------------------------------------------------
+         Mobile navigation
+      --------------------------------------------------------- */
+      const setMenu = (open) => {
+        body.classList.toggle("menu-open", open);
+        menuButton?.setAttribute("aria-expanded", String(open));
+        menuButton?.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+        mobileMenu?.setAttribute("aria-hidden", String(!open));
+
+        if (window.gsap && !reduceMotion) {
+          if (open) {
+            gsap.fromTo(
+              ".mobile-menu__nav a",
+              { y: 22, opacity: 0 },
+              { y: 0, opacity: 1, duration: .45, stagger: .055, ease: "power3.out" }
+            );
+          }
+        }
+      };
+
+      menuButton?.addEventListener("click", () => {
+        setMenu(!body.classList.contains("menu-open"));
+      });
+
+      document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => setMenu(false));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && body.classList.contains("menu-open")) {
+          setMenu(false);
+          menuButton?.focus();
+        }
+      });
+
+      /* ---------------------------------------------------------
+         Header and active navigation
+      --------------------------------------------------------- */
+      const handleScroll = () => {
+        header.classList.toggle("is-scrolled", window.scrollY > 20);
+      };
+
+      handleScroll();
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      const trackedSections = [...document.querySelectorAll("main section[id]")];
+      const headerLinks = [...document.querySelectorAll(".header__desktop a")];
+
+      if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+            if (!visible) return;
+
+            headerLinks.forEach((link) => {
+              link.classList.toggle(
+                "is-active",
+                link.getAttribute("href") === `#${visible.target.id}`
+              );
+            });
+          },
+          {
+            rootMargin: "-28% 0px -58% 0px",
+            threshold: [0.05, 0.2, 0.5]
+          }
+        );
+
+        trackedSections.forEach((section) => sectionObserver.observe(section));
+      }
+
+      /* ---------------------------------------------------------
+         Project CTA routing
+         All project and availability actions lead to the visible email button.
+      --------------------------------------------------------- */
+      document.querySelectorAll(".email-cta").forEach((link) => {
+        link.addEventListener("click", () => {
+          window.setTimeout(() => {
+            if (!sendEmailButton) return;
+            sendEmailButton.classList.remove("is-targeted");
+            void sendEmailButton.offsetWidth;
+            sendEmailButton.classList.add("is-targeted");
+            sendEmailButton.focus({ preventScroll: true });
+          }, 520);
+        });
+      });
+
+      /* ---------------------------------------------------------
+         Creative decoration carousel
+         Automatically advances while visible. Manual arrows, dots,
+         keyboard controls and touch scrolling remain available.
+      --------------------------------------------------------- */
+      if (creativeTrack) {
+        const creativeSlides = [...creativeTrack.querySelectorAll(".creative-carousel__slide")];
+        const creativeCarousel = creativeTrack.closest(".creative-carousel");
+        const creativeAutoplayDelay = 2600;
+        let creativeIndex = 0;
+        let carouselScrollTimer = null;
+        let creativeAutoplayTimer = null;
+        let creativeCarouselVisible = false;
+
+        const stopCreativeAutoplay = () => {
+          window.clearTimeout(creativeAutoplayTimer);
+          creativeAutoplayTimer = null;
+        };
+
+        const scheduleCreativeAutoplay = () => {
+          stopCreativeAutoplay();
+
+          if (
+            reduceMotion ||
+            !creativeCarouselVisible ||
+            document.hidden ||
+            creativeSlides.length < 2
+          ) return;
+
+          creativeAutoplayTimer = window.setTimeout(() => {
+            updateCreativeCarousel(creativeIndex + 1);
+            scheduleCreativeAutoplay();
+          }, creativeAutoplayDelay);
+        };
+
+        const updateCreativeCarousel = (index, shouldScroll = true) => {
+          creativeIndex = (index + creativeSlides.length) % creativeSlides.length;
+
+          if (shouldScroll) {
+            creativeSlides[creativeIndex]?.scrollIntoView({
+              behavior: reduceMotion ? "auto" : "smooth",
+              block: "nearest",
+              inline: "start"
+            });
+          }
+
+          [...creativeDots.children].forEach((dot, dotIndex) => {
+            const active = dotIndex === creativeIndex;
+            dot.classList.toggle("is-active", active);
+            dot.setAttribute("aria-current", active ? "true" : "false");
+          });
+        };
+
+        const selectCreativeSlide = (index) => {
+          updateCreativeCarousel(index);
+          scheduleCreativeAutoplay();
+        };
+
+        creativeSlides.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.className = "creative-carousel__dot";
+          dot.type = "button";
+          dot.setAttribute("aria-label", `Show creative decoration image ${index + 1}`);
+          dot.addEventListener("click", () => selectCreativeSlide(index));
+          creativeDots.appendChild(dot);
+        });
+
+        creativePrev?.addEventListener("click", () => selectCreativeSlide(creativeIndex - 1));
+        creativeNext?.addEventListener("click", () => selectCreativeSlide(creativeIndex + 1));
+
+        creativeTrack.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            selectCreativeSlide(creativeIndex - 1);
+          }
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            selectCreativeSlide(creativeIndex + 1);
+          }
+        });
+
+        creativeTrack.addEventListener("scroll", () => {
+          window.clearTimeout(carouselScrollTimer);
+          carouselScrollTimer = window.setTimeout(() => {
+            const nearest = creativeSlides.reduce((best, slide, index) => {
+              const distance = Math.abs(slide.offsetLeft - creativeTrack.scrollLeft);
+              return distance < best.distance ? { index, distance } : best;
+            }, { index: 0, distance: Infinity });
+            updateCreativeCarousel(nearest.index, false);
+            scheduleCreativeAutoplay();
+          }, 90);
+        }, { passive: true });
+
+        document.addEventListener("visibilitychange", scheduleCreativeAutoplay);
+
+        if ("IntersectionObserver" in window && creativeCarousel) {
+          const creativeCarouselObserver = new IntersectionObserver(
+            ([entry]) => {
+              creativeCarouselVisible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+
+              if (creativeCarouselVisible) {
+                scheduleCreativeAutoplay();
+              } else {
+                stopCreativeAutoplay();
+              }
+            },
+            { threshold: [0, 0.25, 0.6] }
+          );
+
+          creativeCarouselObserver.observe(creativeCarousel);
+        } else {
+          creativeCarouselVisible = true;
+          scheduleCreativeAutoplay();
+        }
+
+        updateCreativeCarousel(0, false);
+      }
+
+      /* ---------------------------------------------------------
+         Enlarged image viewer
+         Excludes only the finishing images beneath
+         “The visual language of fine watchmaking.”
+      --------------------------------------------------------- */
+      const zoomableImages = [
+        ...document.querySelectorAll(
+          ".company-visuals .media img, .company-rotor img, .movement-card .media img, .creative-carousel .media img, .realizations-gallery .media img, .contact-image img"
+        )
+      ];
+      let lightboxIndex = 0;
+      let lightboxTrigger = null;
+
+      const renderLightboxImage = () => {
+        const source = zoomableImages[lightboxIndex];
+        if (!source || !lightboxImage) return;
+        lightboxImage.src = source.currentSrc || source.src;
+        lightboxImage.alt = source.alt || "Expanded watchmaking image";
+        lightboxCaption.textContent = source.alt || "";
+      };
+
+      const openLightbox = (index, trigger) => {
+        if (!lightbox || !zoomableImages.length) return;
+        lightboxIndex = index;
+        lightboxTrigger = trigger;
+        renderLightboxImage();
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        body.classList.add("lightbox-open");
+        body.style.overflow = "hidden";
+        lightboxClose?.focus();
+      };
+
+      const closeLightbox = () => {
+        if (!lightbox) return;
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        body.classList.remove("lightbox-open");
+        body.style.overflow = "";
+        lightboxImage?.removeAttribute("src");
+        lightboxTrigger?.focus?.({ preventScroll: true });
+      };
+
+      const moveLightbox = (direction) => {
+        lightboxIndex = (lightboxIndex + direction + zoomableImages.length) % zoomableImages.length;
+        renderLightboxImage();
+      };
+
+      zoomableImages.forEach((img, index) => {
+        img.classList.add("zoomable-image");
+        img.tabIndex = 0;
+        img.setAttribute("role", "button");
+        img.setAttribute("aria-label", `${img.alt || "Image"}. Open larger view.`);
+        img.addEventListener("click", () => openLightbox(index, img));
+        img.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openLightbox(index, img);
+          }
+        });
+      });
+
+      lightboxClose?.addEventListener("click", closeLightbox);
+      lightboxPrev?.addEventListener("click", () => moveLightbox(-1));
+      lightboxNext?.addEventListener("click", () => moveLightbox(1));
+
+      lightbox?.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox?.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeLightbox();
+        if (event.key === "ArrowLeft") moveLightbox(-1);
+        if (event.key === "ArrowRight") moveLightbox(1);
+      });
+
+      /* ---------------------------------------------------------
+         Catalogue filtering and search
+      --------------------------------------------------------- */
+      const movementCards = [...document.querySelectorAll(".movement-card")];
+      const filterButtons = [...document.querySelectorAll(".filter-button")];
+      const searchInput = document.getElementById("movement-search");
+      let activeFilter = "all";
+
+      const filterCatalogue = () => {
+        const query = (searchInput?.value || "").trim().toLowerCase();
+
+        movementCards.forEach((card) => {
+          const brandMatch =
+            activeFilter === "all" || card.dataset.brand === activeFilter;
+          const searchMatch =
+            !query || (card.dataset.search || "").toLowerCase().includes(query);
+          const show = brandMatch && searchMatch;
+
+          card.classList.toggle("is-hidden", !show);
+        });
+
+        if (window.ScrollTrigger) {
+          ScrollTrigger.refresh();
+        }
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter;
+          filterButtons.forEach((item) => {
+            item.classList.toggle("is-active", item === button);
+          });
+          filterCatalogue();
+        });
+      });
+
+      searchInput?.addEventListener("input", filterCatalogue);
+
+      /* ---------------------------------------------------------
+         Download Christophe Schaefer's vCard
+      --------------------------------------------------------- */
+      document.getElementById("add-contact")?.addEventListener("click", () => {
+        const vCard = [
+          "BEGIN:VCARD",
+          "VERSION:3.0",
+          "N:Schaefer;Christophe;;;",
+          "FN:Christophe Schaefer",
+          "ORG:Wonderful Times SA",
+          "TEL;TYPE=CELL:+41793331230",
+          "EMAIL;TYPE=INTERNET:office@wonderfultimes.ch",
+          "ADR;TYPE=WORK:;;Alle;;;Switzerland",
+          "URL:https://wonderfultimes.ch",
+          "END:VCARD"
+        ].join("\r\n");
+
+        const blob = new Blob([vCard], { type: "text/vcard;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "Christophe-Schaefer-Wonderful-Times.vcf";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        toast.classList.add("is-visible");
+        setTimeout(() => toast.classList.remove("is-visible"), 2600);
+      });
+
+      /* ---------------------------------------------------------
+         Pointer glow
+      --------------------------------------------------------- */
+      const cursorGlow = document.querySelector(".cursor-glow");
+
+      if (cursorGlow && window.matchMedia("(pointer:fine)").matches && !reduceMotion) {
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+
+        window.addEventListener("pointermove", (event) => {
+          targetX = event.clientX;
+          targetY = event.clientY;
+        }, { passive: true });
+
+        const animateGlow = () => {
+          currentX += (targetX - currentX) * .08;
+          currentY += (targetY - currentY) * .08;
+          cursorGlow.style.transform = `translate3d(${currentX - 220}px, ${currentY - 220}px, 0)`;
+          requestAnimationFrame(animateGlow);
+        };
+
+        requestAnimationFrame(animateGlow);
+      }
+
+      /* ---------------------------------------------------------
+         GSAP page and scroll animations
+      --------------------------------------------------------- */
+      function startPageAnimations() {
+        if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
+          document.querySelectorAll(".hero-reveal, .reveal").forEach((element) => {
+            element.style.opacity = "1";
+            element.style.transform = "none";
+          });
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+        heroTimeline
+          .fromTo(
+            ".hero__logo",
+            { y: 18, opacity: 0 },
+            { y: 0, opacity: 1, duration: .7 }
+          )
+          .fromTo(
+            ".hero__partner",
+            { y: 14, opacity: 0 },
+            { y: 0, opacity: 1, duration: .55 },
+            "-=.42"
+          )
+          .fromTo(
+            ".hero__title .line",
+            { yPercent: 55, opacity: 0, rotateX: -12 },
+            { yPercent: 0, opacity: 1, rotateX: 0, duration: .85, stagger: .08 },
+            "-=.28"
+          )
+          .fromTo(
+            ".hero__subtitle",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: .6 },
+            "-=.55"
+          )
+          .fromTo(
+            ".hero__actions",
+            { y: 15, opacity: 0 },
+            { y: 0, opacity: 1, duration: .5 },
+            "-=.4"
+          )
+          .fromTo(
+            ".hero__nav a",
+            { y: 18, opacity: 0 },
+            { y: 0, opacity: 1, duration: .5, stagger: .055 },
+            "-=.25"
+          )
+          .fromTo(
+            ".hero__scroll",
+            { opacity: 0 },
+            { opacity: 1, duration: .5 },
+            "-=.2"
+          );
+
+        gsap.to(".aurora--one", {
+          xPercent: 20,
+          yPercent: 18,
+          rotation: 18,
+          duration: 10,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+
+        gsap.to(".aurora--two", {
+          xPercent: -18,
+          yPercent: -14,
+          rotation: -20,
+          duration: 12,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+
+        gsap.to(".aurora--three", {
+          xPercent: -12,
+          yPercent: 16,
+          scale: 1.18,
+          duration: 9,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+
+        gsap.to(".hero__grid", {
+          yPercent: 14,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2
+          }
+        });
+
+        gsap.utils.toArray(".reveal").forEach((element) => {
+          gsap.fromTo(
+            element,
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: .8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: element,
+                start: "top 88%",
+                once: true
+              }
+            }
+          );
+        });
+
+        gsap.utils.toArray(".reveal-group").forEach((group) => {
+          const children = group.children;
+          gsap.fromTo(
+            children,
+            { y: 34, opacity: 0, scale: .985 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: .8,
+              stagger: .1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: group,
+                start: "top 84%",
+                once: true
+              }
+            }
+          );
+        });
+
+        gsap.utils.toArray(".media img").forEach((image) => {
+          gsap.fromTo(
+            image,
+            { scale: 1.07 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: image.closest(".media"),
+                start: "top bottom",
+                end: "bottom top",
+                scrub: .6
+              }
+            }
+          );
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      startLoader();
+    })();
+  </script>
+</body>
+</html>
